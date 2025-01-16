@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Analyzer Suite</title>
+  <style>
+    /* Reset and global styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fbc2eb);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Container styling */
+    .container {
+      max-width: 800px;
+      background: #ffffffd9; /* Slightly transparent white */
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    /* Headings */
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: #2c3e50;
+    }
+
+    h2 {
+      margin-top: 1.5rem;
+      font-size: 2rem;
+      color: #34495e;
+    }
+
+    /* Text and links */
+    p {
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #555;
+    }
+
+    a {
+      color: #3498db;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      color: #1abc9c;
+    }
+
+    /* Feature list */
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0;
+      text-align: left;
+    }
+
+    ul li {
+      background: #f7f9fa;
+      margin: 0.5rem 0;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      color: #2c3e50;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    ul li:hover {
+      transform: translateY(-5px);
+    }
+
+    ul li:before {
+      content: "✔️";
+      margin-right: 1rem;
+      color: #1abc9c;
+      font-size: 1.2rem;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #7f8c8d;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      ul li {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Text Analyzer Suite</h1>
+    <p>
+      Unlock the full potential of your text with powerful analysis tools built for developers and researchers.
+    </p>
+    <h2>Features:</h2>
+    <ul>
+      <li>Sentiment Analysis: Understand the tone of your text</li>
+      <li>Keyword Extraction: Highlight the most important terms</li>
+      <li>Word Cloud Generation: Create visually engaging word clouds</li>
+      <li>N-Gram Generation: Analyze text patterns with advanced n-grams</li>
+    </ul>
+    <p>
+      <a href="https://text-analyzer-suite.netlify.app/">Explore Tools</a> and gain insights from your data.
+    </p>
+    <footer>
+      Built with ❤️ for developers | Unlock the power of text analysis.
+    </footer>
+  </div>
+</body>
+
+</html>
