@@ -5,6 +5,13 @@ import (
 	"text-analyzer/core"
 )
 
+type AnalyzerResponse struct {
+	WordCount      int `json:"wordCount"`
+	CharacterCount int `json:"characterCount"`
+	LetterCount    int `json:"letterCount"`
+	SentenceCount  int `json:"sentenceCount"`
+}
+
 func TextAnalyzer(w http.ResponseWriter, r *http.Request) {
 	var requestBody CommonRequest
 
@@ -15,8 +22,11 @@ func TextAnalyzer(w http.ResponseWriter, r *http.Request) {
 
 	data := core.MainFunc(requestBody.Message)
 
-	response := CommonResponse {
-		Message: data.WordCount,
+	response := AnalyzerResponse{
+		WordCount:      data.WordCount,
+		CharacterCount: data.CharacterCount,
+		LetterCount:    data.LetterCount,
+		SentenceCount:  data.SentenceCount,
 	}
 
 	writeJSONResponse(w, http.StatusOK, response)
