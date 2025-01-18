@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"net/http"
-	"strings"
+	"text-analyzer/core"
 )
 
 func TextAnalyzer(w http.ResponseWriter, r *http.Request) {
@@ -13,8 +13,10 @@ func TextAnalyzer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	data := core.MainFunc(requestBody.Message)
+
 	response := CommonResponse {
-		Message: strings.ToUpper(requestBody.Message),
+		Message: string(data.WordCount),
 	}
 
 	writeJSONResponse(w, http.StatusOK, response)
