@@ -6,10 +6,11 @@ import (
 )
 
 type Analysis struct {
-	WordCount      int
-	CharacterCount int
-	LetterCount    int
-	SentenceCount  int
+	WordCount        int
+	CharacterCount   int
+	LetterCount      int
+	SentenceCount    int
+	AverageWordCount float64
 }
 
 func countWord(text string) int {
@@ -60,6 +61,10 @@ func countSentence(text string) int {
 	return count
 }
 
+func averageWordCount(text string) float64 {
+	return float64(characterCount(text) / countWord(text))
+}
+
 func isWhiteSpace(char rune) bool {
 	return char == ' ' || char == '\n' || char == '\t'
 }
@@ -71,11 +76,13 @@ func MainFunc(text string) Analysis {
 	characterCount := characterCount(text)
 	letterCount := letterCount(text)
 	sentenceCount := countSentence(text)
+	averageWordCount := averageWordCount(text)
 
 	return Analysis{
-		WordCount:      wordCount,
-		CharacterCount: characterCount,
-		LetterCount:    letterCount,
-		SentenceCount:  sentenceCount,
+		WordCount:        wordCount,
+		CharacterCount:   characterCount,
+		LetterCount:      letterCount,
+		SentenceCount:    sentenceCount,
+		AverageWordCount: averageWordCount,
 	}
 }
