@@ -68,3 +68,31 @@ func writeJSONResponse(w http.ResponseWriter, statusCode int, response interface
 func writeError(w http.ResponseWriter, statusCode int, err string) {
 	writeJSONResponse(w, statusCode, ErrorResponse{ Error: err })
 }
+
+func UploadFile(r *http.Request) (map[string]string, error) {
+	err := r.ParseMultipartForm(10 << 20)
+	if err != nil {
+		return nil, fmt.Errorf("unable to read request body: %v", err)
+	}
+
+	file, _, err := r.FormFile("myFile")
+	if err != nil {
+		return nil, fmt.Errorf("unable to read request body: %v", err)
+	}
+	defer file.Close()
+
+	fileBytes, err := io.ReadAll(file)
+	if err != nil {
+		return nil, fmt.Errorf("unable to read file bytes: %v", err)
+	}
+
+	temp := map[string]string{
+		"message": string(fileBytes),
+	}
+
+	for key, data := range r.MultipartForm.Value {
+		temp[key] = data[0]
+	}
+
+	return temp, nil
+}
