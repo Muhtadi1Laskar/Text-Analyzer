@@ -1,11 +1,12 @@
 package core
 
 import (
+	"strconv"
 	"strings"
 )
 
 type Analysis struct {
-	WordCount int
+	WordCount string
 }
 
 func countWord (text string) int {
@@ -14,7 +15,7 @@ func countWord (text string) int {
 }
 
 func MainFunc(text string) Analysis {
-	wordCount := countWord(text)
+	wordCount := strconv.Itoa(countWord(text))
 
 	return Analysis{
 		WordCount: wordCount,

@@ -16,7 +16,7 @@ func TextAnalyzer(w http.ResponseWriter, r *http.Request) {
 	data := core.MainFunc(requestBody.Message)
 
 	response := CommonResponse {
-		Message: string(data.WordCount),
+		Message: data.WordCount,
 	}
 
 	writeJSONResponse(w, http.StatusOK, response)
