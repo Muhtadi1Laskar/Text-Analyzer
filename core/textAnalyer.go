@@ -10,7 +10,7 @@ type Analysis struct {
 	CharacterCount   int
 	LetterCount      int
 	SentenceCount    int
-	AverageWordCount float64
+	AverageWordCount float32
 }
 
 func countWord(text string) int {
@@ -61,8 +61,8 @@ func countSentence(text string) int {
 	return count
 }
 
-func averageWordCount(text string) float64 {
-	return float64(characterCount(text) / countWord(text))
+func averageWordCount(text string) float32 {
+	return float32(characterCount(text)) / float32(countWord(text))
 }
 
 func isWhiteSpace(char rune) bool {

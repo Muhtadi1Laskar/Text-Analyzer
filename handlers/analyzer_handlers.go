@@ -10,7 +10,7 @@ type AnalyzerResponse struct {
 	CharacterCount int `json:"characterCount"`
 	LetterCount    int `json:"letterCount"`
 	SentenceCount  int `json:"sentenceCount"`
-	AverageWordCount float64 `json:"averageWordCount"`
+	AverageWordCount float32 `json:"averageWordCount"`
 }
 
 func TextAnalyzer(w http.ResponseWriter, r *http.Request) {
