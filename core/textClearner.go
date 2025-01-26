@@ -5,11 +5,19 @@ import (
 	"unicode"
 )
 
+var stopWordsSet = map[string]struct{}{
+	"a": {}, "an": {}, "this": {}, "the": {}, "is": {}, "are": {}, "was": {}, "were": {}, "will": {}, "be": {},
+	"in": {}, "on": {}, "at": {}, "of": {}, "for": {}, "to": {}, "from": {}, "with": {},
+	"and": {}, "or": {}, "but": {}, "not": {}, "if": {}, "then": {}, "else": {},
+	"i": {}, "you": {}, "he": {}, "she": {}, "it": {}, "we": {}, "they": {}, "my": {}, "your": {}, "his": {}, "her": {}, "its": {}, "our": {}, "their": {},
+	"couldve": {}, "couldnt": {}, "wouldnt": {}, "shouldnt": {}, "wasnt": {}, "wont": {}, "shallnt": {}, "didnt": {}, "weev": {}, "im": {},
+}
+
 func RemovePunctuation(text string) string {
 	var builder strings.Builder
 
 	for _, word := range text {
-		if word != '-' || word != '\'' || !unicode.IsPunct(word) {
+		if word == '-' || word == '\'' || !unicode.IsPunct(word) {
 			builder.WriteRune(word)
 		}
 	}
@@ -34,4 +42,15 @@ func Tokenize(text string) []string {
 	}
 
 	return tokens
+}
+
+func RemoveStopWords(text []string) []string {
+	var filteredStr []string
+
+	for _, word := range text {
+		if _, exists := stopWordsSet[word]; !exists {
+			filteredStr = append(filteredStr, word)
+		}
+	}
+	return filteredStr
 }
