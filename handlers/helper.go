@@ -63,7 +63,7 @@ func writeJSONResponse(w http.ResponseWriter, statusCode int, response interface
 }
 
 func writeError(w http.ResponseWriter, statusCode int, err string) {
-	writeJSONResponse(w, statusCode, ErrorResponse{ Error: err })
+	writeJSONResponse(w, statusCode, ErrorResponse{Error: err})
 }
 
 func UploadFile(r *http.Request) (map[string]string, error) {
