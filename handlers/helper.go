@@ -9,6 +9,8 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
+var validate = validator.New()
+
 type CommonRequest struct {
 	Message string `json:"message" validate:"required"`
 }
@@ -39,18 +41,16 @@ func EnableCORS(next http.Handler) http.Handler {
 func readRequestBody(r *http.Request, target interface{}) error {
 	reqBody, err := io.ReadAll(r.Body)
 	if err != nil {
-		return fmt.Errorf("unable to read request body: %v", err)
+		return fmt.Errorf("failed to read request body: %v", err)
 	}
 	defer r.Body.Close()
 
 	if err := json.Unmarshal(reqBody, target); err != nil {
-		return fmt.Errorf("unable to read request body: %v", err)
+		return fmt.Errorf("failed to unmarshal request body: %v", err)
 	}
 
-	validate := validator.New()
-	err = validate.Struct(target)
-	if err != nil {
-		return fmt.Errorf("validation error: %w", err)
+	if err := validate.Struct(target); err != nil {
+		return fmt.Errorf("validation failed: %w", err)
 	}
 
 	return nil
@@ -67,20 +67,19 @@ func writeError(w http.ResponseWriter, statusCode int, err string) {
 }
 
 func UploadFile(r *http.Request) (map[string]string, error) {
-	err := r.ParseMultipartForm(10 << 20)
-	if err != nil {
-		return nil, fmt.Errorf("unable to read request body: %v", err)
+	if err := r.ParseMultipartForm(10 << 20); err != nil {
+		return nil, fmt.Errorf("failed to parse multipart form: %v", err)
 	}
 
 	file, _, err := r.FormFile("myFile")
 	if err != nil {
-		return nil, fmt.Errorf("unable to read request body: %v", err)
+		return nil, fmt.Errorf("failed to retrieve file: %v", err)
 	}
 	defer file.Close()
 
 	fileBytes, err := io.ReadAll(file)
 	if err != nil {
-		return nil, fmt.Errorf("unable to read file bytes: %v", err)
+		return nil, fmt.Errorf("failed to read file content: %v", err)
 	}
 
 	temp := map[string]string{
