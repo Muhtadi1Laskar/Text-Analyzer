@@ -43,6 +43,7 @@ func Tokenize(text string) []string {
 }
 
 func RemoveStopWords(texts string) string {
+	texts = RemovePunctuation(texts)
 	text := strings.Fields(texts)
 	var filteredStr []string
 
