@@ -11,7 +11,7 @@ var stopWordsSet = map[string]struct{}{
 	"in": {}, "on": {}, "at": {}, "of": {}, "for": {}, "to": {}, "from": {}, "with": {},
 	"and": {}, "or": {}, "but": {}, "not": {}, "if": {}, "then": {}, "else": {},
 	"i": {}, "you": {}, "he": {}, "she": {}, "it": {}, "we": {}, "they": {}, "my": {}, "your": {}, "his": {}, "her": {}, "its": {}, "our": {}, "their": {},
-	"couldve": {}, "couldnt": {}, "wouldnt": {}, "shouldnt": {}, "wasnt": {}, "wont": {}, "shallnt": {}, "didnt": {}, "weev": {}, "im": {}, "as": {},
+	"couldve": {}, "couldnt": {}, "wouldnt": {}, "shouldnt": {}, "wasnt": {}, "wont": {}, "shallnt": {}, "didnt": {}, "weev": {}, "im": {}, "as": {}, "would": {}, "have": {}, "had": {},
 }
 
 func RemovePunctuation(text string) string {
