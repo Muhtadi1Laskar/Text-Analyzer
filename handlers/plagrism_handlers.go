@@ -11,7 +11,7 @@ type PlagrismRequest struct {
 }
 
 type PlagrismResponse struct {
-	Comparision float64 `json:"comparision" validate:"required"`
+	Similarity float64 `json:"similarity" validate:"required"`
 }
 
 func PlagrismChecker(w http.ResponseWriter, r *http.Request) {
@@ -28,10 +28,10 @@ func PlagrismChecker(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	comparisionRatio := core.CheckPlagrism(fileOne["message"], fileTwo["message"])
+	similarity := core.CheckPlagrism(fileOne["message"], fileTwo["message"])
 
 	response := PlagrismResponse{
-		Comparision: comparisionRatio,
+		Similarity: similarity,
 	}
 
 	writeJSONResponse(w, http.StatusOK, response)
