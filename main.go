@@ -25,6 +25,7 @@ func main() {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/text-analyzer", handlers.TextAnalyzer)
+    mux.HandleFunc("/text-converter", handlers.TextCleaner)
 
 	fmt.Println("Server running on 5000")
 

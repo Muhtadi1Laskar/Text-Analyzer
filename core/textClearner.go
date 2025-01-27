@@ -1,6 +1,7 @@
 package core
 
 import (
+	"regexp"
 	"strings"
 	"unicode"
 )
@@ -10,18 +11,15 @@ var stopWordsSet = map[string]struct{}{
 	"in": {}, "on": {}, "at": {}, "of": {}, "for": {}, "to": {}, "from": {}, "with": {},
 	"and": {}, "or": {}, "but": {}, "not": {}, "if": {}, "then": {}, "else": {},
 	"i": {}, "you": {}, "he": {}, "she": {}, "it": {}, "we": {}, "they": {}, "my": {}, "your": {}, "his": {}, "her": {}, "its": {}, "our": {}, "their": {},
-	"couldve": {}, "couldnt": {}, "wouldnt": {}, "shouldnt": {}, "wasnt": {}, "wont": {}, "shallnt": {}, "didnt": {}, "weev": {}, "im": {},
+	"couldve": {}, "couldnt": {}, "wouldnt": {}, "shouldnt": {}, "wasnt": {}, "wont": {}, "shallnt": {}, "didnt": {}, "weev": {}, "im": {}, "as": {},
 }
 
 func RemovePunctuation(text string) string {
-	var builder strings.Builder
+	text = strings.ToLower(text)
+	reg := regexp.MustCompile(`[^\w\s]`)
+	text = reg.ReplaceAllString(text, "")
 
-	for _, word := range text {
-		if word == '-' || word == '\'' || !unicode.IsPunct(word) {
-			builder.WriteRune(word)
-		}
-	}
-	return builder.String()
+	return text
 }
 
 func Tokenize(text string) []string {
@@ -44,7 +42,8 @@ func Tokenize(text string) []string {
 	return tokens
 }
 
-func RemoveStopWords(text []string) []string {
+func RemoveStopWords(texts string) string {
+	text := strings.Fields(texts)
 	var filteredStr []string
 
 	for _, word := range text {
@@ -52,5 +51,5 @@ func RemoveStopWords(text []string) []string {
 			filteredStr = append(filteredStr, word)
 		}
 	}
-	return filteredStr
+	return strings.Join(filteredStr, " ")
 }
