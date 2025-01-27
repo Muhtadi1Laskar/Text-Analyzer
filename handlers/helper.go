@@ -66,12 +66,12 @@ func writeError(w http.ResponseWriter, statusCode int, err string) {
 	writeJSONResponse(w, statusCode, ErrorResponse{Error: err})
 }
 
-func UploadFile(r *http.Request) (map[string]string, error) {
+func UploadFile(r *http.Request, fileName string) (map[string]string, error) {
 	if err := r.ParseMultipartForm(10 << 20); err != nil {
 		return nil, fmt.Errorf("failed to parse multipart form: %v", err)
 	}
 
-	file, _, err := r.FormFile("myFile")
+	file, _, err := r.FormFile(fileName)
 	if err != nil {
 		return nil, fmt.Errorf("failed to retrieve file: %v", err)
 	}

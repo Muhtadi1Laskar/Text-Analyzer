@@ -14,7 +14,7 @@ type AnalyzerResponse struct {
 }
 
 func TextAnalyzer(w http.ResponseWriter, r *http.Request) {
-	fileText, err := UploadFile(r)
+	fileText, err := UploadFile(r, "myFile")
 	if err != nil {
 		writeError(w, http.StatusInternalServerError, err.Error())
 		return
