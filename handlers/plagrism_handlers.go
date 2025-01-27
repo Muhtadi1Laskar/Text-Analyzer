@@ -8,6 +8,7 @@ import (
 type PlagrismRequest struct {
 	TextOne string `json:"textOne" validate:"required"`
 	TextTwo string `json:"textTwo" validate:"required"`
+	CheckerType string `json:"checkerType" validate:"required"`
 }
 
 type PlagrismResponse struct {
@@ -28,7 +29,17 @@ func PlagrismChecker(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	similarity := core.CheckPlagrism(fileOne["message"], fileTwo["message"])
+	var similarity float64
+	switch fileOne["checkerType"] {
+	case "cosine-similarity":
+		similarity = core.CheckPlagrism(fileOne["message"], fileTwo["message"])
+	case "minhash":
+		similarity = core.MinHash(fileOne["message"], fileTwo["message"])
+	default:
+		writeError(w, http.StatusInternalServerError, "Invalid Checker Type")
+		return
+	}
+
 
 	response := PlagrismResponse{
 		Similarity: similarity,
