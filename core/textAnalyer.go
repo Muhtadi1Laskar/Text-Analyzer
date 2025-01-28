@@ -11,6 +11,7 @@ type Analysis struct {
 	LetterCount      int
 	SentenceCount    int
 	AverageWordCount float32
+	TotalStopWords   int
 }
 
 func countWord(text string) int {
@@ -61,6 +62,19 @@ func countSentence(text string) int {
 	return count
 }
 
+func countStopWords(text string) int {
+	text = RemovePunctuation(text)
+	tokenizeText := strings.Fields(text)
+
+	var totalStopWords int = 0
+	for _, elem := range tokenizeText {
+		if _, exists := stopWordsSet[elem]; !exists {
+			totalStopWords++
+		}
+	}
+	return totalStopWords
+}
+
 func averageWordCount(text string) float32 {
 	return float32(characterCount(text)) / float32(countWord(text))
 }
@@ -77,6 +91,7 @@ func MainFunc(text string) Analysis {
 	letterCount := letterCount(text)
 	sentenceCount := countSentence(text)
 	averageWordCount := averageWordCount(text)
+	totalStopWords := countStopWords(text)
 
 	return Analysis{
 		WordCount:        wordCount,
@@ -84,5 +99,6 @@ func MainFunc(text string) Analysis {
 		LetterCount:      letterCount,
 		SentenceCount:    sentenceCount,
 		AverageWordCount: averageWordCount,
+		TotalStopWords:   totalStopWords,
 	}
 }
