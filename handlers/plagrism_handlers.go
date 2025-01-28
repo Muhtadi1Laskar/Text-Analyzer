@@ -45,6 +45,8 @@ func PlagrismChecker(w http.ResponseWriter, r *http.Request) {
 		similarity = core.CheckPlagrism(textOne, textTwo)
 	case "minhash":
 		similarity = core.MinHash(textOne, textTwo)
+	case "robin-karp":
+		similarity = core.RabinKarp(textOne, textTwo)
 	default:
 		writeError(w, http.StatusInternalServerError, "Invalid Checker Type")
 		return
