@@ -68,7 +68,7 @@ func countStopWords(text string) int {
 
 	var totalStopWords int = 0
 	for _, elem := range tokenizeText {
-		if _, exists := stopWordsSet[elem]; !exists {
+		if _, exists := stopWordsSet[elem]; exists {
 			totalStopWords++
 		}
 	}
